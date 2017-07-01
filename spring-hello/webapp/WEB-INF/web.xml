@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+  <display-name>spring-hello</display-name>
+  
+  <!-- 시작시 실행되는 클래스 -->
+  <listener>
+  	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+  	<!-- 세션 / 리퀘스트 등을 사용한다. -->
+  </listener>
+  
+  <servlet>
+  	<servlet-name>spring</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<!-- 서블릿 사용 -->
+  	<init-param>
+  		<!-- 서블릿 기본설정파일 -->
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>classpath:spring/context-web.xml</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <!-- 모든파일은 스프링을 거친다. -->
+  <servlet-mapping>
+  	<servlet-name>spring</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
