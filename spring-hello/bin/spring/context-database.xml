@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- 데이터 베이스 설정 -->
+	<!-- 트렉젝션에 대하여 어노테이션을 사용한다. -->
+	<tx:annotation-driven/>
+	
+	<!-- 디비정보 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/hanbit?characterEncoding-utf8" />
+		<property name="username" value="hanbit" />
+		<property name="password" value="hanbit" />
+	</bean>
+	
+	<!-- 마이바티스 기본설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 디비 사양 -->
+		<property name="dataSource" ref="dataSource" /> 
+		<!-- 마이바티스 설정위치 -->
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		<!-- 맵퍼(디비 쿼리문)저장소 -->
+		<property name="mapperLocations"  value="classpath:mybatis/mappers/**/*.xml"/>
+	</bean>
+	
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<!-- 생성자(SqlSessionTemplate) 삽입 -> SqlSessionTemplate 은 생성자가 없어서 수동으로 -->
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
+	
+	<!-- 트랙젝션 설정 스프링 기본 DataSourceTransactionManager 사용 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" /> <!-- 디비정보 주입 -->
+	</bean>
+
+</beans>

@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 서블릿설정 -->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
   <display-name>spring-hello</display-name>
   
+  
+  <!-- 로그 4j 사용 -->
+  <listener>
+  	<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+  <!-- 로그설정 -->
+  <context-param>
+  	<param-name>log4jConfigLocation</param-name>
+  	<param-value>classpath:log/log4j.xml</param-value>
+  </context-param>
+  
+  <!-- 설정파일 세팅 -->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <!-- 설정파일 읽어오는 위치 -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>
+  		classpath:spring/context-core.xml
+  		classpath:spring/context-database.xml
+  	</param-value>
+  </context-param>
+  
+  
   <!-- 시작시 실행되는 클래스 -->
+  <!-- 리스너 설정 -->
   <listener>
   	<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   	<!-- 세션 / 리퀘스트 등을 사용한다. -->

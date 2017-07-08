@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+  <select id="selectList" resultType="ArticleVO">
+	select no, title, views, update_dt 
+	from tbl_board 
+    order by no desc;
+  </select>
+  
+  <select id="searchList" parameterType="string" resultType="ArticleVO">
+  	select no, title, views, update_dt 
+	from tbl_board 
+	where title like concat('%',#{keyword},'%')
+	order by no desc;
+  </select>
+  
+  <insert id="insertArticle" parameterType="articleVO">
+  	INSERT INTO tbl_board
+  		(title,contents,update_dt)
+  	VALUE
+  		(#{title},#{contents},NOW())
+  </insert>
+</mapper>

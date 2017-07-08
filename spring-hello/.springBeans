@@ -9,6 +9,8 @@
 	<configs>
 		<config>src/main/resources/spring/context.xml</config>
 		<config>src/main/resources/spring/context-web.xml</config>
+		<config>src/main/resources/spring/context-core.xml</config>
+		<config>src/main/resources/spring/context-database.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
