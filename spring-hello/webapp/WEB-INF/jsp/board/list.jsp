@@ -40,6 +40,7 @@
 
 <div class="board-btns">
 	<button id="btn-write" class="btn btn-primary">글쓰기</button>
+	<button id="btn-signout" class="btn btn-warning" onclick="location.href='/signout';">로그아웃</button>
 </div>
 
 <script type="text/javascript" src="https://unpkg.com/jquery@3.2.1/dist/jquery.min.js"></script>
